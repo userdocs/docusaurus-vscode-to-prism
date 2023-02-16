@@ -1,0 +1,54 @@
+name: Docusaurus vscode to primsm-react-renderer
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: boot strap
+        run: |
+          pushd vscode-themes || exit 1
+          mapfile -t file_paths_array < <(find . -type f -name "*.json")
+          popd || exit 1
+
+          pushd themeFromVsCode || exit 1
+          npm install
+          npm audit fix
+          popd || exit 1
+
+          for files in "${file_paths_array[@]/\.\//}"; do
+            mkdir -p "docusaurus-themes/src/prism/themes/${files%%/*}"
+            cp "vscode-themes/${files}" "themeFromVsCode/"
+            printf %s "${files##*/}" > "themeFromVsCode/theme_name.txt"
+            pushd themeFromVsCode || exit 1
+            npm start
+            popd || exit 1
+            ported_theme="${files##*/}" ported_theme="${ported_theme/\.json/\.js}"
+            cp "themeFromVsCode/${ported_theme}" "docusaurus-themes/src/prism/themes/${files%%/*}"
+            rm -rf "themeFromVsCode/${ported_theme}" "themeFromVsCode/${files##*/}" "themeFromVsCode/theme_name.txt"
+          done
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Automated Change template-file-list.json
+          commit_user_name: My GitHub Actions Bot # defaults to "github-actions[bot]"
+          commit_user_email: my-github-actions-bot@example.org # defaults to "github-actions[bot]@users.noreply.github.com"
+          commit_author: Author <actions@github.com> # defaults to author of the commit that triggered the run
+
