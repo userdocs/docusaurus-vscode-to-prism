@@ -21,7 +21,7 @@ By cloning the locally repo, adding your themes and running the `build.sh` scrip
 Copy the themes you want from the
 
 ```text
-/docusaurus-vscode-to-prism/docusaurus-themes/src/prism/themes/themeName
+docusaurus-themes/src/prism/themes/themeName
 ```
 
 Place them in this folder, create it if it does not exist
