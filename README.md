@@ -8,7 +8,7 @@ It has been slightly modified to output a working Docusaurus prism js file with 
 
 ## How it works
 
-It will take any vscode theme json files in the `vscode-themes` directory and create Docusaurus compatible themes from then in the `docusaurus-themes/src/prism/themes` directory.
+It will take any vscode theme json files in the `vscode-themes` directory and create Docusaurus compatible themes from them and place them in the `docusaurus-themes/src/prism/themes` directory.
 
 ## How to use it
 
@@ -38,3 +38,5 @@ Here the example is the `bearded-theme-black-ruby.js` from the `bearded` folder.
 const lightCodeTheme = require("./src/prism/themes/bearded/bearded-theme-black-ruby.js");
 const darkCodeTheme = require("./src/prism/themes/bearded/bearded-theme-black-ruby.js");
 ```
+
+You can take a single theme `js` file and rename to `index.js` and place it in a folder. The point to the folder and it will autoload this theme.
