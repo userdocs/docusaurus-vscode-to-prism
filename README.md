@@ -35,6 +35,6 @@ Now in your `docusaurus.config.js` modify the theme lines to this, where it poin
 Here the example is the `bearded-theme-black-ruby.js` from the `bearded` folder.
 
 ```js
-const lightCodeTheme = require("./src/prism/theme/bearded/bearded-theme-black-ruby.js");
-const darkCodeTheme = require("./src/prism/theme/bearded/bearded-theme-black-ruby.js");
+const lightCodeTheme = require("./src/prism/themes/bearded/bearded-theme-black-ruby.js");
+const darkCodeTheme = require("./src/prism/themes/bearded/bearded-theme-black-ruby.js");
 ```
