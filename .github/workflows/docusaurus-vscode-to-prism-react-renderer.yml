@@ -45,7 +45,7 @@ jobs:
             rm -rf "themeFromVsCode/${ported_theme}" "themeFromVsCode/${files##*/}" "themeFromVsCode/theme_name.txt"
           done
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Automated Change template-file-list.json
           commit_user_name: My GitHub Actions Bot # defaults to "github-actions[bot]"
